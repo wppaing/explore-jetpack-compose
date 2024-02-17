@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,18 +36,27 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    // Birthday card ui
 //                    GreetingImage(
 //                        message = stringResource(R.string.happy_birthday_text),
 //                        from = stringResource(R.string.signature_text)
 //                    )
-                    ComposeArticle(
-                        title = stringResource(id = R.string.article_title),
-                        sectionOne = stringResource(
-                            id = R.string.article_section_one
-                        ),
-                        sectionTwo = stringResource(
-                            id = R.string.article_section_two
-                        )
+
+                    // Compose Article ui
+//                    ComposeArticle(
+//                        title = stringResource(id = R.string.article_title),
+//                        sectionOne = stringResource(
+//                            id = R.string.article_section_one
+//                        ),
+//                        sectionTwo = stringResource(
+//                            id = R.string.article_section_two
+//                        )
+//                    )
+
+                    // Task Manager ui
+                    TaskManager(
+                        title = stringResource(id = R.string.task_manager_title),
+                        description = stringResource(id = R.string.task_manager_description)
                     )
                 }
             }
@@ -126,18 +136,34 @@ fun ComposeArticle(
     }
 }
 
+@Composable
+fun TaskManager(title: String, description: String, modifier: Modifier = Modifier) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxSize()
+    ) {
+        val image = painterResource(id = R.drawable.ic_task_completed)
+
+        Image(painter = image, contentDescription = null)
+        Text(
+            text = title,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(top = 24.dp)
+                .padding(bottom = 8.dp)
+        )
+        Text(text = description, fontSize = 16.sp)
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     LearningJetpackComposeTheme {
-        ComposeArticle(
-            title = stringResource(id = R.string.article_title),
-            sectionOne = stringResource(
-                id = R.string.article_section_one
-            ),
-            sectionTwo = stringResource(
-                id = R.string.article_section_two
-            )
+        TaskManager(
+            title = stringResource(id = R.string.task_manager_title),
+            description = stringResource(id = R.string.task_manager_description)
         )
     }
 
