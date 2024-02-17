@@ -35,9 +35,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingImage(
-                        message = stringResource(R.string.happy_birthday_text),
-                        from = stringResource(R.string.signature_text)
+//                    GreetingImage(
+//                        message = stringResource(R.string.happy_birthday_text),
+//                        from = stringResource(R.string.signature_text)
+//                    )
+                    ComposeArticle(
+                        title = stringResource(id = R.string.article_title),
+                        sectionOne = stringResource(
+                            id = R.string.article_section_one
+                        ),
+                        sectionTwo = stringResource(
+                            id = R.string.article_section_two
+                        )
                     )
                 }
             }
@@ -89,11 +98,47 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
     }
 }
 
+@Composable
+fun ComposeArticle(
+    title: String,
+    sectionOne: String,
+    sectionTwo: String,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier) {
+        val image = painterResource(id = R.drawable.bg_compose_background)
+        Image(painter = image, contentDescription = null)
+        Text(
+            text = title,
+            fontSize = 24.sp,
+            modifier = Modifier.padding(16.dp)
+        )
+        Text(
+            text = sectionOne,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        )
+        Text(
+            text = sectionTwo,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     LearningJetpackComposeTheme {
-        GreetingImage(message = "Happy Birthday Emma!", "From James")
+        ComposeArticle(
+            title = stringResource(id = R.string.article_title),
+            sectionOne = stringResource(
+                id = R.string.article_section_one
+            ),
+            sectionTwo = stringResource(
+                id = R.string.article_section_two
+            )
+        )
     }
 
 }
