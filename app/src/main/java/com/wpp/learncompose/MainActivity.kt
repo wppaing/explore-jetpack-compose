@@ -1,5 +1,6 @@
 package com.wpp.learncompose
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,12 +10,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Email
+import androidx.compose.material.icons.rounded.Phone
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,7 +71,10 @@ class MainActivity : ComponentActivity() {
 //                    )
 
                     // Compose Quadrant app
-                    ComposeQuadrant()
+//                    ComposeQuadrant()
+
+                    // Business Card Ui
+                    BusinessCard()
                 }
             }
         }
@@ -219,11 +230,95 @@ fun ComposeQuadrant() {
     }
 }
 
+@Composable
+fun BusinessCard() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .background(Color(0xFFD2E8D4))
+    ) {
+        val color = Color(0xFF006D3A)
+
+        Box(
+            Modifier
+                .weight(1f)
+                .fillMaxSize()
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Box(
+                    Modifier
+                        .width(100.dp)
+                        .background(Color(0xFF073042))
+                        .padding(8.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.android_logo),
+                        contentDescription = null
+                    )
+                }
+                Text(
+                    text = "Jennifer Doe",
+                    fontSize = 40.sp,
+                    fontWeight = FontWeight.Light
+                )
+                Text(
+                    text = "Android developer Extraordinaire",
+                    color = color,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+        }
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 40.dp)
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+
+                Row {
+                    Icon(Icons.Rounded.Phone, contentDescription = null, tint = color)
+                    Spacer(Modifier.width(20.dp))
+                    Text(
+                        text = "+11 (123) 444 555 666",
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+                Row {
+                    Icon(Icons.Rounded.Share, contentDescription = null, tint = color)
+                    Spacer(Modifier.width(20.dp))
+                    Text(
+                        text = "@AndroidDev",
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+                Row {
+                    Icon(Icons.Rounded.Email, contentDescription = null, tint = color)
+                    Spacer(Modifier.width(20.dp))
+                    Text(
+                        text = "jen.doe@android.com",
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     LearningJetpackComposeTheme {
-        ComposeQuadrant()
+        BusinessCard()
     }
 
 }
