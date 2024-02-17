@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -54,10 +57,13 @@ class MainActivity : ComponentActivity() {
 //                    )
 
                     // Task Manager ui
-                    TaskManager(
-                        title = stringResource(id = R.string.task_manager_title),
-                        description = stringResource(id = R.string.task_manager_description)
-                    )
+//                    TaskManager(
+//                        title = stringResource(id = R.string.task_manager_title),
+//                        description = stringResource(id = R.string.task_manager_description)
+//                    )
+
+                    // Compose Quadrant app
+                    ComposeQuadrant()
                 }
             }
         }
@@ -157,14 +163,67 @@ fun TaskManager(title: String, description: String, modifier: Modifier = Modifie
     }
 }
 
+@Composable
+fun QuadrantCard(title: String, description: String, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = title,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Text(text = description, textAlign = TextAlign.Justify)
+    }
+}
+
+@Composable
+fun ComposeQuadrant() {
+    Column(Modifier.fillMaxWidth()) {
+        Row(Modifier.weight(1f)) {
+            QuadrantCard(
+                title = "Text composable",
+                description = stringResource(id = R.string.text_composable_desc),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(Color(0xFFEADDFF))
+            )
+            QuadrantCard(
+                title = "Image composable",
+                description = stringResource(id = R.string.image_composable_desc),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(Color(0xFFD0BCFF))
+            )
+        }
+        Row(Modifier.weight(1f)) {
+            QuadrantCard(
+                title = "Row composable",
+                description = stringResource(id = R.string.row_composable_desc),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(Color(0xFFB69DF8))
+            )
+            QuadrantCard(
+                title = "Column composable",
+                description = stringResource(id = R.string.column_composable_desc),
+                modifier = Modifier
+                    .weight(1f)
+                    .background(Color(0xFFF6EDFF))
+            )
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     LearningJetpackComposeTheme {
-        TaskManager(
-            title = stringResource(id = R.string.task_manager_title),
-            description = stringResource(id = R.string.task_manager_description)
-        )
+        ComposeQuadrant()
     }
 
 }
